@@ -8,15 +8,27 @@ function Portfolio(name, stocks){
 }
 
 Portfolio.prototype.add = function(symbol, amount){
-  var stock = findStock(this.stocks, symbol);
+  var index = findStock(this.stocks, symbol);
   
-  if(stock){ //if you find this stock, modify it by adding stocks together
-    stock.count += amount;
-  }else{ //if not, it will create a new object & push new object into array
-    stock = new Stock(symbol, amount);
+  if(index >= 0){ //if you find this stock
+    this.stocks[index].count += amount; //then, add stocks together
+  }else{ //if does not find matching stock,
+    var stock = new Stock(symbol, amount); //then, create a new Stock object & push to tech stock array
     this.stocks.push(stock);
   }
 }; 
+
+Portfolio.prototype.del = function(symbol, amount){
+  var index = findStock(this.stocks, symbol);
+  
+  if(index >= 0){ //if index is greater than or equal to 0, then substract the amount from the total
+    this.stocks[index].count -= amount; //then, 
+
+    if(this.stocks[index].count <= 0){//if stocks is less than or equal to 0, 
+      this.stocks.splice(index, 1);//then, start at index and remove 1 stock object
+  }
+  }
+};
 
 // PRIVATE HELPER FUNCTIONS//
 // this function is "hidden", and is not exported with the Portfolio model
@@ -24,10 +36,10 @@ Portfolio.prototype.add = function(symbol, amount){
 function findStock(stocks, symbol){
   for(var i = 0; i < stocks.length; i++){
     if(stocks[i].symbol === symbol.toUpperCase()){
-      return stocks[i];
+      return i;
     }
   }
-  return null;
+  return -1;
 }
 
 

@@ -21,7 +21,7 @@ describe('Portfolio', function(){
    it('should add stocks objects to the tech portfolio stock array', function(){
     var tech = new Portfolio('Tech Portfolio');
     tech.add('aapl', 50); //adds new stock (symbol, and amount of stocks you want to buy)
-    tech.add('amzn', 35); // ^
+    tech.add('msft', 35); // ^
     tech.add('aapl', 25); // ^^
 
     expect(tech.stocks).to.have.length(2);
@@ -30,5 +30,20 @@ describe('Portfolio', function(){
     expect(tech.stocks[1].count).to.equal(35);
    });
   });
+
+  describe('#del', function(){
+   it('should delete stock objects from portfolio stock array', function(){
+    var tech = new Portfolio('Tech Portfolio');
+    tech.add('aapl', 50); //adds stock (symbol, and amount of stocks you want to buy)
+    tech.add('msft', 35); // ^^
+
+    tech.del('aapl', 10); //deletes new stock (symbol, and amount of stocks you want to buy)
+    tech.del('msft', 40); // ^
+    tech.del('aapl', 20); // ^
+
+    expect(tech.stocks).to.have.length(1);
+    expect(tech.stocks[0].count).to.equal(20);
+   });
+ });
 });
 
