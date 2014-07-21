@@ -8,4 +8,4 @@ function Stock(symbol, count){
 
 
 
-module.exports = Stock;
+module.exports = Stock; 
