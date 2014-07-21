@@ -17,4 +17,16 @@ describe('Stock', function(){
       expect(aapl.price).to.equal(0);
     });
   });
+
+  describe('.getQuote', function(){
+    it('should get a quote from a webservice', function(done){
+      //creates asynchronous test so that you don't have to wait for webservice.
+      Stock.getQuote('aapl', function(quote){
+        expect(quote).to.be.least(0);
+        done(); //call 'done' function to tell mocha test is done
+      });
+
+    });
+  });
+
 });
