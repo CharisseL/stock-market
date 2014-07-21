@@ -21,7 +21,7 @@ describe('Stock', function(){
   describe('.getQuote', function(){
     it('should get a quote from a webservice', function(done){
       //creates asynchronous test so that you don't have to wait for webservice.
-      Stock.getQuote('aapl', function(quote){
+      Stock.getQuote('aapl', function(quote){//I'm going to call Stock.getQuote, and it'll call me back when it has the Stock Quote.
         expect(quote).to.be.least(0);
         done(); //call 'done' function to tell mocha test is done
       });
